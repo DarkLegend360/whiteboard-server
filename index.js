@@ -4,10 +4,19 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 
 const app = express();
-app.use(cors({ origin: "http://localhost:3000" }));
+const isProduction = app.settings.env === "production";
+app.use(
+  cors({
+    origin: isProduction
+      ? "https://whiteboard-client-tau.vercel.app/"
+      : "http://localhost:3000",
+  })
+);
 const httpServer = createServer();
 const io = new Server(httpServer, {
-  cors: "http://localhost:3000",
+  cors: isProduction
+    ? "https://whiteboard-client-tau.vercel.app/"
+    : "http://localhost:3000",
 });
 
 io.on("connection", (socket) => {
