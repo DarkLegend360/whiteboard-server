@@ -4,10 +4,10 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 
 const app = express();
-const isProduction = app.settings.env === "production";
-const url = isProduction
-  ? "https://whiteboard-client-tau.vercel.app"
-  : "http://localhost:3000";
+const isDevelop = app.settings.env === "development";
+const url = isDevelop
+  ? "http://localhost:3000"
+  : "https://whiteboard-client-tau.vercel.app";
 app.use(
   cors({
     origin: url,
@@ -34,4 +34,4 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(4000);
+httpServer.listen(5000);
