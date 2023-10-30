@@ -8,11 +8,7 @@ const isDevelop = app.settings.env === "development";
 const url = isDevelop
   ? "http://localhost:3000"
   : "https://whiteboard-client-tau.vercel.app";
-app.use(
-  cors({
-    origin: url,
-  })
-);
+app.use(cors());
 const httpServer = createServer();
 const io = new Server(httpServer, {
   cors: url,
